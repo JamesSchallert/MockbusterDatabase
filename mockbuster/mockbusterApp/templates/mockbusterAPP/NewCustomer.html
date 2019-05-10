@@ -1,0 +1,17 @@
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1>New Customer</h1>
+
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+
+<a href="{% url 'Customer' %}">Cancel</a>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

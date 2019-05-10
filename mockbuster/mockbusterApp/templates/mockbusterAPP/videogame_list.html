@@ -1,0 +1,40 @@
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1>Video Game Inventory</h1>
+
+<p><a href="{% url 'home' %}">Home</a></p>
+<p><a href="{% url 'logout' %}">logout</a></p>
+ 
+<table border="1">
+<thead>
+    <tr>
+    <th>Name</th>
+	<th>Genre</th>
+    <th>Publisher</th>
+	<th>Copies Owned</th>
+	<th>Copies Rented</th>
+	<th>Branch Location</th>
+    </tr>
+</thead>
+<tbody>
+    {% for game in object_list %}
+    <tr>
+    <td>{{ game.vd.vd_name }}</td>
+    <td>{{ game.vd.vd_genre }}</td>
+	<td>{{ game.vd.vd_publisher }}</td>
+    <td>{{ game.vg_copies_owned }}</td>
+	<td>{{ game.vg_copies_rented }}</td>
+    <td>{{ game.br.br_id }}</td>
+	</tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

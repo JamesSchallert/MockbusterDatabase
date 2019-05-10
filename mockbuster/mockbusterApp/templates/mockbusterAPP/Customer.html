@@ -1,0 +1,41 @@
+{% block content %}
+{% if user.is_authenticated %}
+
+<h1>Customers</h1>
+
+<p><a href="{% url 'home' %}">Home</a></p>
+<p><a href="{% url 'logout' %}">Logout</a></p>
+<p></p>
+
+<p><a href="{% url 'NewCustomer' %}">New Customer</a></p>
+<table border="1">
+<thead>
+    <tr>
+    <th>Customer</th>
+	<th>Phone Number</th>
+	<th>Address</th>
+	<th>Update</th>
+	<th>Delete</th>
+
+	
+    </tr>
+</thead>
+<tbody>
+    {% for customer in object_list %}
+    <tr>
+    <td>{{ customer.cu_first_name }} {{ customer.cu_last_name }}</td>
+	<td>{{ customer.cu_phone_num }} </td>
+	
+	<td>{{ customer.cu_address }} </td>
+	<td> <a href="{% url "UpdateCustomer" customer.cu_id %}">Update</a> </td>
+	<td> <a href="{% url "DeleteCustomer" customer.cu_id %}">Delete</a> </td>
+	
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
